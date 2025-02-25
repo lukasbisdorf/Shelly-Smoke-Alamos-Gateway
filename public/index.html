@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShellySmoke2FE2 Configuration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ShellySmoke2FE2 Configuration</h1>
+        </header>
+
+        <section class="config-section info-section">
+            <h2>Configuration Guide</h2>
+            <div class="info-content">
+                <h3>Step 1: Configure FE2 Settings</h3>
+                <p>Enter your FE2 server details below. The authorization token can be found in your FE2 configuration.</p>
+                
+                <h3>Step 2: Add Shelly Smoke Devices</h3>
+                <p>For each Shelly Smoke device:</p>
+                <ol>
+                    <li>Add the device using the form below</li>
+                    <li>Click the "Webhooks" button to reveal the webhook URLs</li>
+                    <li>Configure these webhooks in your Shelly device's web interface:
+                        <ul>
+                            <li><strong>Smoke Alarm:</strong> Use the "Alarm Webhook" URL when smoke is detected</li>
+                            <li><strong>Battery Warning:</strong> Use the "Battery Webhook" URL for battery level changes</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="config-section">
+            <h2>FE2 Configuration</h2>
+            <form id="fe2-config-form">
+                <div class="form-group">
+                    <label for="fe2-url">FE2 URL:</label>
+                    <input type="url" id="fe2-url" required>
+                </div>
+                <div class="form-group">
+                    <label for="fe2-auth">Authorization:</label>
+                    <input type="text" id="fe2-auth" required>
+                </div>
+                <div class="form-group">
+                    <label for="fe2-sender">Sender:</label>
+                    <input type="text" id="fe2-sender" required>
+                </div>
+                <button type="submit">Save FE2 Configuration</button>
+            </form>
+        </section>
+
+        <section class="config-section">
+            <h2>Device Management</h2>
+            <form id="device-form">
+                <div class="form-group">
+                    <label for="device-id">Shelly ID:</label>
+                    <input type="text" id="device-id" required>
+                </div>
+                <div class="form-group">
+                    <label for="device-name">Name:</label>
+                    <input type="text" id="device-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="device-unit">FE2 Unit (Smoke):</label>
+                    <input type="text" id="device-unit" required>
+                </div>
+                <div class="form-group">
+                    <label for="device-battery-unit">FE2 Unit (Battery):</label>
+                    <input type="text" id="device-battery-unit" required>
+                    <small class="help-text">Unit to be alarmed on low battery</small>
+                </div>
+                <div class="form-group">
+                    <label for="device-street">Street:</label>
+                    <input type="text" id="device-street" required>
+                </div>
+                <div class="form-group">
+                    <label for="device-house">House Number:</label>
+                    <input type="text" id="device-house" required>
+                </div>
+                <div class="form-group">
+                    <label for="device-city">City:</label>
+                    <input type="text" id="device-city" required>
+                </div>
+                <div class="form-group coordinates">
+                    <label>Coordinates:</label>
+                    <div class="coord-inputs">
+                        <div class="input-with-help">
+                            <input type="text" 
+                                   id="device-lat" 
+                                   pattern="-?\d+\.?\d*"
+                                   placeholder="Latitude" 
+                                   required 
+                                   title="Enter a valid decimal number (e.g., 52.520008)">
+                            <small class="help-text">e.g., 52.520008 (use dot as decimal separator)</small>
+                        </div>
+                        <div class="input-with-help">
+                            <input type="text" 
+                                   id="device-lon" 
+                                   pattern="-?\d+\.?\d*"
+                                   placeholder="Longitude" 
+                                   required
+                                   title="Enter a valid decimal number (e.g., 13.404954)">
+                            <small class="help-text">e.g., 13.404954 (use dot as decimal separator)</small>
+                        </div>
+                    </div>
+                    <small class="help-text coordinates-hint">
+                        Tip: Find coordinates on Google Maps by right-clicking a location and selecting "What's here?"
+                    </small>
+                </div>
+                <button type="submit">Add Device</button>
+            </form>
+
+            <div id="devices-list" class="devices-list">
+                <!-- Devices will be listed here -->
+            </div>
+        </section>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --danger-color: #e74c3c;
+    --background-color: #f5f6fa;
+    --border-color: #dcdde1;
+    --info-bg-color: #e8f4f8;
+    --info-border-color: #b8e3ed;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background-color);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.config-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button.test {
+    background-color: #4CAF50;
+    color: white;
+    margin-left: 5px;
+}
+
+button.test:hover {
+    background-color: #45a049;
+}
+
+.coordinates .coord-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.devices-list {
+    margin-top: 20px;
+}
+
+.device-item {
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.device-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.device-item button.edit {
+    background-color: var(--secondary-color);
+    padding: 5px 10px;
+    font-size: 0.8em;
+}
+
+.device-item button.remove {
+    position: static;
+    top: 10px;
+    right: 10px;
+    background-color: var(--danger-color);
+    padding: 5px 10px;
+    font-size: 0.8em;
+}
+
+.device-item button.show-webhooks {
+    background-color: #17a2b8;
+}
+
+.help-text {
+    color: #666;
+    font-size: 0.8em;
+    margin-top: 2px;
+    display: block;
+}
+
+.coordinates-hint {
+    margin-top: 8px;
+    color: var(--secondary-color);
+}
+
+.input-with-help {
+    display: flex;
+    flex-direction: column;
+}
+
+.webhook-info {
+    display: none;
+    background: #f8f9fa;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.webhook-url {
+    font-family: monospace;
+    word-break: break-all;
+    margin-bottom: 5px;
+}
+
+.copy-button {
+    background-color: #6c757d;
+    padding: 3px 8px;
+    font-size: 0.8em;
+    margin-left: 5px;
+}
+
+.info-section {
+    background-color: var(--info-bg-color);
+    border: 1px solid var(--info-border-color);
+    border-radius: 4px;
+    margin-bottom: 30px;
+}
+
+.info-content {
+    color: #2c3e50;
+}
+
+.info-content h3 {
+    color: var(--primary-color);
+    margin: 15px 0 10px 0;
+}
+
+.info-content ol, .info-content ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.info-content li {
+    margin: 5px 0;
+}
+
+.info-content ul li {
+    list-style-type: disc;
+}
