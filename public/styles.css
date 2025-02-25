@@ -152,6 +152,8 @@ button.test:hover {
 
 .devices-list {
     margin-top: 20px;
+    max-height: 500px; /* adjust as needed */
+    overflow-y: auto;
 }
 
 /* New device card design */
@@ -161,7 +163,7 @@ button.test:hover {
     border: 1px solid var(--border-color);
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    padding: 15px; /* reduced padding */
+    padding: 10px 15px;  /* reduced overall padding */
     margin-bottom: 20px;
     position: relative;
     transition: transform 0.2s ease;
@@ -174,9 +176,17 @@ button.test:hover {
 }
 
 .device-item h3 {
-    margin: 0 0 10px;
+    margin-top: 20px; /* slightly reduced from 30px */
+    margin-bottom: 5px;
+    font-size: 1.1em;  /* slightly smaller */
     padding-bottom: 5px;
     border-bottom: 1px solid var(--border-color);
+}
+
+.device-item p {
+    margin: 2px 0;    /* reduce vertical margins */
+    font-size: 0.9em; /* reduce font size for compactness */
+    line-height: 1.2;
 }
 
 /* Move device action buttons to bottom with separation */
@@ -216,10 +226,6 @@ button.test:hover {
 
 .device-item button.show-webhooks {
     background-color: #17a2b8;
-}
-
-.device-item h3 {
-    margin-top: 30px;
 }
 
 .help-text {

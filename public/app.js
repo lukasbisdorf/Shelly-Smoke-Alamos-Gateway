@@ -288,13 +288,29 @@ function setActiveTab(activeBtnId) {
     });
 }
 
+// New code to persist sidebar tab selection in the URI
+window.addEventListener('load', () => {
+    const hash = window.location.hash;
+    if (hash === '#devices') {
+        setActiveTab('btn-devices');
+        document.getElementById('fe2-panel').style.display = 'none';
+        document.getElementById('devices-panel').style.display = 'block';
+    } else { // default to FE2 configuration if hash is '#fe2-config' or not set
+        setActiveTab('btn-fe2');
+        document.getElementById('fe2-panel').style.display = 'block';
+        document.getElementById('devices-panel').style.display = 'none';
+    }
+});
+
 document.getElementById('btn-fe2').addEventListener('click', () => {
+    window.location.hash = '#fe2-config';
     setActiveTab('btn-fe2');
     document.getElementById('fe2-panel').style.display = 'block';
     document.getElementById('devices-panel').style.display = 'none';
 });
 
 document.getElementById('btn-devices').addEventListener('click', () => {
+    window.location.hash = '#devices';
     setActiveTab('btn-devices');
     document.getElementById('fe2-panel').style.display = 'none';
     document.getElementById('devices-panel').style.display = 'block';
