@@ -40,3 +40,99 @@ Remember to click "Save" after configuring each webhook.
    - "Remove" deletes the device configuration
 
 4. Configure Shelly Device Webhooks:
+
+## Architecture
+
+The application serves as a bridge between Shelly Smoke Pro devices and FE2 alarm systems. It consists of three main components:
+
+1. Web Interface - For configuration and device management
+2. Webhook API - Receives alerts from Shelly devices
+3. FE2 Client - Forwards alerts to the FE2 system
+
+### Communication Flow
+
+```mermaid
+graph TB
+    A[Shelly Smoke Pro] -->|Webhook| B[Webhook API]
+    B --> C[Event Handler]
+    C --> D[FE2 Client]
+    D -->|HTTP POST| E[FE2 Server]
+    F[Web Interface] -->|Configuration| G[(Config Store)]
+    G -.->|Read| C
+```
+
+### API Documentation
+
+#### Webhook Endpoints
+
+1. Alarm Webhook
+```
+POST /api/webhook/{deviceId}/alarm
+```
+Payload example:
+```json
+{
+    "events": {
+        "smoke": true
+    }
+}
+```
+
+2. Battery Webhook
+```
+POST /api/webhook/{deviceId}/battery
+```
+Payload example:
+```json
+{
+    "battery": {
+        "percent": 85
+    }
+}
+```
+
+#### Configuration API
+
+1. Device Management
+```
+GET /api/devices
+POST /api/devices
+PUT /api/devices/{deviceId}
+DELETE /api/devices/{deviceId}
+```
+
+2. Settings
+```
+GET /api/settings
+PUT /api/settings
+```
+
+### FE2 Integration
+
+The application communicates with FE2 using its HTTP interface. Alerts are sent as POST requests with the following format:
+
+```
+POST http://{fe2-server}/msgservice/msg
+```
+Payload:
+```json
+{
+    "sender": "configured-sender-name",
+    "unit": "configured-unit-number",
+    "text": "Smoke detected at {location}"
+}
+```
+
+### Error Handling
+
+- Failed webhooks return HTTP 400 for invalid requests
+- Configuration errors return HTTP 422 with error details
+- FE2 communication failures are logged and retried
+- Device configuration validation ensures proper setup
+
+### Security Considerations
+
+- HTTPS recommended for production deployment
+- FE2 authentication token required
+- Input validation on all API endpoints
+- Rate limiting on webhook endpoints

@@ -142,13 +142,7 @@ async function loadDevices() {
         const webhooks = getWebhookUrls(device.id);
         return `
             <div class="device-item">
-                <div class="device-actions">
-                    <button class="show-webhooks" onclick="toggleWebhooks('${device.id}')">Webhooks</button>
-                    <button class="edit" onclick="editDevice('${device.id}')">Edit</button>
-                    <button class="remove" onclick="removeDevice('${device.id}')">Remove</button>
-                    <button class="test" onclick="triggerSmokeTest('${device.id}')">Test Smoke Alarm</button>
-                    <button class="test" onclick="triggerBatteryTest('${device.id}')">Test Battery Alarm</button>
-                </div>
+               
                 <h3>${device.name}</h3>
                 <p>ID: ${device.id}</p>
                 <p>Smoke Unit: ${device.unit}</p>
@@ -168,6 +162,13 @@ async function loadDevices() {
                         ${webhooks.battery}
                         <button class="copy-button" onclick="copyToClipboard('${webhooks.battery}')">Copy</button>
                     </div>
+                </div>
+                 <div class="device-actions">
+                    <button class="show-webhooks" onclick="toggleWebhooks('${device.id}')">Webhooks</button>
+                    <button class="edit" onclick="editDevice('${device.id}')">Edit</button>
+                    <button class="remove" onclick="removeDevice('${device.id}')">Remove</button>
+                    <button class="test" onclick="triggerSmokeTest('${device.id}')">Test Smoke Alarm</button>
+                    <button class="test" onclick="triggerBatteryTest('${device.id}')">Test Battery Alarm</button>
                 </div>
             </div>
         `;
@@ -226,9 +227,6 @@ async function editDevice(id) {
     // Change form button text
     const submitButton = document.querySelector('#device-form button[type="submit"]');
     submitButton.textContent = 'Update Device';
-
-    // Scroll to form
-    document.getElementById('device-form').scrollIntoView({ behavior: 'smooth' });
 }
 
 async function handleDeviceForm(event) {
@@ -282,6 +280,25 @@ async function triggerBatteryTest(deviceId) {
         console.error(error);
     }
 }
+
+// Update tab switching for new sidebar buttons
+function setActiveTab(activeBtnId) {
+    document.querySelectorAll('.sidebar button').forEach(btn => {
+        btn.classList.toggle('active', btn.id === activeBtnId);
+    });
+}
+
+document.getElementById('btn-fe2').addEventListener('click', () => {
+    setActiveTab('btn-fe2');
+    document.getElementById('fe2-panel').style.display = 'block';
+    document.getElementById('devices-panel').style.display = 'none';
+});
+
+document.getElementById('btn-devices').addEventListener('click', () => {
+    setActiveTab('btn-devices');
+    document.getElementById('fe2-panel').style.display = 'none';
+    document.getElementById('devices-panel').style.display = 'block';
+});
 
 // Event listeners
 document.getElementById('fe2-config-form').addEventListener('submit', saveFE2Config);
