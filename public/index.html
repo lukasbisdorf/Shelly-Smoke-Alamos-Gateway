@@ -42,21 +42,24 @@
                 <section class="config-section info-section">
                     <h2>Konfigurationsanleitung</h2>
                     <div class="info-content">
-                        <h3>Schritt 1: FE2 Einstellungen konfigurieren</h3>
-                        <p>Geben Sie unten Ihre FE2-Serverdetails ein. Das Autorisierungstoken finden Sie in Ihrer FE2-Konfiguration.</p>
+                        <h3>Schritt 1: Alamos FE2 Alarmeingang einrichten:</h3>
+                        <p>
+                            <ul>
+                                <li>Sie einen neuen Alarmeingang "Externe Schnittstelle in Alamos".</li>
+                                <li>Vergeben Sie bei "Gülitge Absender" einen beliebigen Namen.</li>
+                                <li>Wählen Sie in der Seitenleiste "HTTP" und aktivieren Sie den Eintrag "HTTP POST"</li>
+                                <li>Speichern Sie den Alarmeingang und starten Sie ihn. </li>
+                            </ul> 
+                        </p>
+                        <h3>Schritt 2: Das Gateway mit Alamos verbinden</h3>
+                        <p>Tragen Sie nun im Untenstehenden Formular die Verbindungsparameter für Ihren Alamos Server ein.
+                            <br> Das Gateway muss in der Lage sein, den Alamos Server via HTTP zu erreichen.
+                        </p>
+                        <p>In das Feld Autorisierung tragen Sie nun den zuvor festgelegten gültigen Absender ein.</p>
+                        <p>Vergeben Sie nun noch eien Namen als Absender. z.B. Shelly Smoke Gateway</p>
                         
-                        <h3>Schritt 2: Shelly Smoke Geräte hinzufügen</h3>
-                        <p>Für jedes Shelly Smoke Gerät:</p>
-                        <ol>
-                            <li>Fügen Sie das Gerät mit dem untenstehenden Formular hinzu</li>
-                            <li>Klicken Sie auf die Schaltfläche "Webhooks", um die Webhook-URLs anzuzeigen</li>
-                            <li>Konfigurieren Sie diese Webhooks in der Weboberfläche Ihres Shelly-Geräts:
-                                <ul>
-                                    <li><strong>Rauchalarm:</strong> Verwenden Sie die "Alarm Webhook" URL, wenn Rauch erkannt wird</li>
-                                    <li><strong>Batteriewarnung:</strong> Verwenden Sie die "Battery Webhook" URL für Änderungen des Batteriestands</li>
-                                </ul>
-                            </li>
-                        </ol>
+                        <h3>Schritt 3: Shelly Smoke Geräte hinzufügen</h3>
+                        <p>Wechseln Sie hierfür links in der Navigation auf "Geräteverwaltung"</p>
                     </div>
                 </section>
 
@@ -82,6 +85,23 @@
 
             <!-- Devices Panel -->
             <section id="devices-panel" class="tab-panel" style="display: none;">
+                <section class="config-section info-section">
+                    <h2>Konfigurationsanleitung</h2>
+                    <div class="info-content">
+                        <h3>Schritt 3: Shelly Smoke Geräte hinzufügen</h3>
+                        <p>Für jedes Shelly Smoke Gerät:</p>
+                        <ol>
+                            <li>Fügen Sie das Gerät mit dem untenstehenden Formular hinzu</li>
+                            <li>Klicken Sie auf die Schaltfläche "Webhooks", um die Webhook-URLs anzuzeigen</li>
+                            <li>Konfigurieren Sie diese Webhooks in der Weboberfläche Ihres Shelly-Geräts:
+                                <ul>
+                                    <li><strong>Rauchalarm:</strong> Verwenden Sie die "Alarm Webhook" URL, wenn Rauch erkannt wird</li>
+                                    <li><strong>Batteriewarnung:</strong> Verwenden Sie die "Battery Webhook" URL für Änderungen des Batteriestands</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
                 <section class="config-section">
                     <h2>Geräteverwaltung</h2>
                     <div class="master-detail">
@@ -103,11 +123,11 @@
                                     <input type="text" id="device-name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="device-unit">FE2 Einheit (Rauch):</label>
+                                    <label for="device-unit">FE2 Einheitenkennung (Rauch):</label>
                                     <input type="text" id="device-unit" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="device-battery-unit">FE2 Einheit (Batterie):</label>
+                                    <label for="device-battery-unit">FE2 Einheitenkennung (Batterie):</label>
                                     <input type="text" id="device-battery-unit" required>
                                     <small class="help-text">Einheit, die bei niedrigem Batteriestand alarmiert wird</small>
                                 </div>
