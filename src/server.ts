@@ -1,9 +1,12 @@
 import express from 'express';
 import path from 'path';
+import passport from 'passport';
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { ConfigManager } from './services/ConfigManager';
 import { AlarmTransformer } from './services/AlarmTransformer';
 import { AlarmForwarder } from './services/AlarmForwarder';
 import { ShellySmokeEvent, ShellyBatteryEvent } from './types/ShellyTypes';
+import jwt from 'jsonwebtoken';
 
 export class Server {
   private app = express();
@@ -14,7 +17,23 @@ export class Server {
   constructor() {
     this.app.use(express.json());
     this.app.use(express.static(path.join(__dirname, '../public')));
+    this.initializePassport();
     this.setupRoutes();
+  }
+
+  private initializePassport() {
+    const opts = {
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.JWT_SECRET || 'your_jwt_secret'
+    };
+
+    passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+      // Here you can add logic to validate the user based on jwt_payload
+      // For simplicity, we'll assume the user is valid if the token is valid
+      return done(null, jwt_payload);
+    }));
+
+    this.app.use(passport.initialize());
   }
 
   private setupRoutes() {
@@ -71,7 +90,22 @@ export class Server {
       res.sendStatus(success ? 200 : 500);
     });
 
-    // Add these new endpoints before the closing setupRoutes() bracket
+    // Login endpoint
+    this.app.post('/api/login', (req, res) => {
+      const { username, password } = req.body;
+      // Replace this with your actual user authentication logic
+      if (username === 'admin' && password === 'password') {
+        const payload = { username };
+        const token = jwt.sign(payload, process.env.JWT_SECRET || 'your_jwt_secret', { expiresIn: '1h' });
+        res.json({ token });
+      } else {
+        res.status(401).json({ error: 'Invalid credentials' });
+      }
+    });
+
+    // Protect all routes below with JWT authentication
+    this.app.use(passport.authenticate('jwt', { session: false }));
+
     this.app.post('/api/devices/:id/test/smoke', async (req, res) => {
       const device = await this.configManager.getDevice(req.params.id);
       if (!device) {

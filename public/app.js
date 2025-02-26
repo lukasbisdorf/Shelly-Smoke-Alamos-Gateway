@@ -1,55 +1,71 @@
 // Utility functions
 const api = {
     async getFE2Config() {
-        const response = await fetch('/api/config/fe2');
+        const response = await fetch('/api/config/fe2', {
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        });
         return response.json();
     },
     
     async setFE2Config(config) {
         await fetch('/api/config/fe2', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
             body: JSON.stringify(config)
         });
     },
     
     async getDevices() {
-        const response = await fetch('/api/config/devices');
+        const response = await fetch('/api/config/devices', {
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        });
         return response.json();
     },
     
     async addDevice(device) {
         await fetch('/api/config/devices', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
             body: JSON.stringify(device)
         });
     },
     
     async removeDevice(id) {
         await fetch(`/api/config/devices/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
     },
 
     async updateDevice(device) {
         await fetch(`/api/config/devices/${device.id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
             body: JSON.stringify(device)
         });
     },
 
     async triggerSmokeTest(deviceId) {
         const response = await fetch(`/api/devices/${deviceId}/test/smoke`, {
-            method: 'POST'
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         if (!response.ok) throw new Error('Failed to trigger smoke test');
     },
 
     async triggerBatteryTest(deviceId) {
         const response = await fetch(`/api/devices/${deviceId}/test/battery`, {
-            method: 'POST'
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         if (!response.ok) throw new Error('Failed to trigger battery test');
     }
@@ -316,7 +332,66 @@ document.getElementById('btn-devices').addEventListener('click', () => {
     document.getElementById('devices-panel').style.display = 'block';
 });
 
+// Handle login
+async function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
+        showApp();
+    } else {
+        alert('Invalid credentials');
+    }
+}
+
+// Handle logout
+function handleLogout() {
+    localStorage.removeItem('token');
+    showLogin();
+}
+
+// Show login form
+function showLogin() {
+    document.getElementById('login-container').style.display = 'block';
+    document.querySelector('.app-container').style.display = 'none';
+    document.querySelector('.header').style.display = 'none';
+}
+
+// Show app content
+function showApp() {
+    document.getElementById('login-container').style.display = 'none';
+    document.querySelector('.app-container').style.display = 'flex';
+    document.querySelector('.header').style.display = 'block';
+    loadFE2Config();
+    loadDevices();
+}
+
+// Check authentication on page load
+function checkAuth() {
+    const token = localStorage.getItem('token');
+    if (token) {
+        showApp();
+    } else {
+        showLogin();
+    }
+}
+
 // Event listeners
+document.getElementById('login-form').addEventListener('submit', handleLogin);
+document.getElementById('logout-button').addEventListener('click', handleLogout);
+
+// Initial load
+checkAuth();
+
 document.getElementById('fe2-config-form').addEventListener('submit', saveFE2Config);
 document.getElementById('device-form').addEventListener('submit', handleDeviceForm);
 

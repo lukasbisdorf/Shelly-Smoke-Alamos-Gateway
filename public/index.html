@@ -7,9 +7,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- New login form -->
+    <div id="login-container" class="container" style="display: none;">
+        <h2>Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    
     <!-- New header bar -->
     <div class="header">
         ShellySmoke2FE2 Configuration
+        <button id="logout-button" style="float: right; background: var(--danger-color); color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Logout</button>
     </div>
     
     <!-- New layout with sidebar and main content -->
