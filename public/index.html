@@ -1,58 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShellySmoke2FE2 Configuration</title>
+    <title>ShellySmoke2FE2 Konfiguration</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- New login form -->
     <div id="login-container" class="container" style="display: none;">
+        <h1>Shelly 2 Alamos Gateway</h1>
         <h2>Login</h2>
         <form id="login-form">
             <div class="form-group">
-                <label for="username">Username:</label>
+                <label for="username">Benutzername:</label>
                 <input type="text" id="username" required>
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
+                <label for="password">Passwort:</label>
                 <input type="password" id="password" required>
             </div>
-            <button type="submit">Login</button>
+            <button type="submit">Anmelden</button>
         </form>
     </div>
     
     <!-- New header bar -->
     <div class="header">
-        ShellySmoke2FE2 Configuration
-        <button id="logout-button" style="float: right; background: var(--danger-color); color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Logout</button>
+        ShellySmoke2FE2 Konfiguration
+        <button id="logout-button" style="float: right; background: var(--danger-color); color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Abmelden</button>
     </div>
     
     <!-- New layout with sidebar and main content -->
     <div class="app-container">
         <div class="sidebar">
-            <button type="button" id="btn-fe2" class="active">FE2 Configuration</button>
-            <button type="button" id="btn-devices">Device Management</button>
+            <button type="button" id="btn-fe2" class="active">FE2 Konfiguration</button>
+            <button type="button" id="btn-devices">Geräteverwaltung</button>
         </div>
         <div class="main-content">
             <!-- FE2 Panel -->
             <section id="fe2-panel" class="tab-panel">
                 <section class="config-section info-section">
-                    <h2>Configuration Guide</h2>
+                    <h2>Konfigurationsanleitung</h2>
                     <div class="info-content">
-                        <h3>Step 1: Configure FE2 Settings</h3>
-                        <p>Enter your FE2 server details below. The authorization token can be found in your FE2 configuration.</p>
+                        <h3>Schritt 1: FE2 Einstellungen konfigurieren</h3>
+                        <p>Geben Sie unten Ihre FE2-Serverdetails ein. Das Autorisierungstoken finden Sie in Ihrer FE2-Konfiguration.</p>
                         
-                        <h3>Step 2: Add Shelly Smoke Devices</h3>
-                        <p>For each Shelly Smoke device:</p>
+                        <h3>Schritt 2: Shelly Smoke Geräte hinzufügen</h3>
+                        <p>Für jedes Shelly Smoke Gerät:</p>
                         <ol>
-                            <li>Add the device using the form below</li>
-                            <li>Click the "Webhooks" button to reveal the webhook URLs</li>
-                            <li>Configure these webhooks in your Shelly device's web interface:
+                            <li>Fügen Sie das Gerät mit dem untenstehenden Formular hinzu</li>
+                            <li>Klicken Sie auf die Schaltfläche "Webhooks", um die Webhook-URLs anzuzeigen</li>
+                            <li>Konfigurieren Sie diese Webhooks in der Weboberfläche Ihres Shelly-Geräts:
                                 <ul>
-                                    <li><strong>Smoke Alarm:</strong> Use the "Alarm Webhook" URL when smoke is detected</li>
-                                    <li><strong>Battery Warning:</strong> Use the "Battery Webhook" URL for battery level changes</li>
+                                    <li><strong>Rauchalarm:</strong> Verwenden Sie die "Alarm Webhook" URL, wenn Rauch erkannt wird</li>
+                                    <li><strong>Batteriewarnung:</strong> Verwenden Sie die "Battery Webhook" URL für Änderungen des Batteriestands</li>
                                 </ul>
                             </li>
                         </ol>
@@ -60,21 +61,21 @@
                 </section>
 
                 <section class="config-section">
-                    <h2>FE2 Configuration</h2>
+                    <h2>FE2 Konfiguration</h2>
                     <form id="fe2-config-form">
                         <div class="form-group">
                             <label for="fe2-url">FE2 URL:</label>
                             <input type="url" id="fe2-url" required>
                         </div>
                         <div class="form-group">
-                            <label for="fe2-auth">Authorization:</label>
+                            <label for="fe2-auth">Autorisierung:</label>
                             <input type="text" id="fe2-auth" required>
                         </div>
                         <div class="form-group">
-                            <label for="fe2-sender">Sender:</label>
+                            <label for="fe2-sender">Absender:</label>
                             <input type="text" id="fe2-sender" required>
                         </div>
-                        <button type="submit">Save FE2 Configuration</button>
+                        <button type="submit">FE2 Konfiguration speichern</button>
                     </form>
                 </section>
             </section>
@@ -82,16 +83,16 @@
             <!-- Devices Panel -->
             <section id="devices-panel" class="tab-panel" style="display: none;">
                 <section class="config-section">
-                    <h2>Device Management</h2>
+                    <h2>Geräteverwaltung</h2>
                     <div class="master-detail">
                         <div>
-                            <h3>Devices</h3>
+                            <h3>Geräte</h3>
                             <div id="devices-list" class="devices-list">
                                 <!-- Devices will be listed here -->
                             </div>
                         </div>
                         <div>
-                            <h3>Device Form</h3>
+                            <h3>Geräteformular</h3>
                             <form id="device-form" class="form-grid">
                                 <div class="form-group">
                                     <label for="device-id">Shelly ID:</label>
@@ -102,53 +103,53 @@
                                     <input type="text" id="device-name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="device-unit">FE2 Unit (Smoke):</label>
+                                    <label for="device-unit">FE2 Einheit (Rauch):</label>
                                     <input type="text" id="device-unit" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="device-battery-unit">FE2 Unit (Battery):</label>
+                                    <label for="device-battery-unit">FE2 Einheit (Batterie):</label>
                                     <input type="text" id="device-battery-unit" required>
-                                    <small class="help-text">Unit to be alarmed on low battery</small>
+                                    <small class="help-text">Einheit, die bei niedrigem Batteriestand alarmiert wird</small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="device-street">Street:</label>
+                                    <label for="device-street">Straße:</label>
                                     <input type="text" id="device-street" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="device-house">House Number:</label>
+                                    <label for="device-house">Hausnummer:</label>
                                     <input type="text" id="device-house" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="device-city">City:</label>
+                                    <label for="device-city">Stadt:</label>
                                     <input type="text" id="device-city" required>
                                 </div>
                                 <div class="form-group coordinates">
-                                    <label>Coordinates:</label>
+                                    <label>Koordinaten:</label>
                                     <div class="coord-inputs">
                                         <div class="input-with-help">
                                             <input type="text" 
                                                    id="device-lat" 
                                                    pattern="-?\d+\.?\d*"
-                                                   placeholder="Latitude" 
+                                                   placeholder="Breitengrad" 
                                                    required 
-                                                   title="Enter a valid decimal number (e.g., 52.520008)">
-                                            <small class="help-text">e.g., 52.520008 (use dot as decimal separator)</small>
+                                                   title="Geben Sie eine gültige Dezimalzahl ein (z.B. 52.520008)">
+                                            <small class="help-text">z.B. 52.520008 (Punkt als Dezimaltrennzeichen verwenden)</small>
                                         </div>
                                         <div class="input-with-help">
                                             <input type="text" 
                                                    id="device-lon" 
                                                    pattern="-?\d+\.?\d*"
-                                                   placeholder="Longitude" 
+                                                   placeholder="Längengrad" 
                                                    required
-                                                   title="Enter a valid decimal number (e.g., 13.404954)">
-                                            <small class="help-text">e.g., 13.404954 (use dot as decimal separator)</small>
+                                                   title="Geben Sie eine gültige Dezimalzahl ein (z.B. 13.404954)">
+                                            <small class="help-text">z.B. 13.404954 (Punkt als Dezimaltrennzeichen verwenden)</small>
                                         </div>
                                     </div>
                                     <small class="help-text coordinates-hint">
-                                        Tip: Find coordinates on Google Maps by right-clicking a location and selecting "What's here?"
+                                        Tipp: Finden Sie Koordinaten auf Google Maps, indem Sie mit der rechten Maustaste auf einen Ort klicken und "Was ist hier?" auswählen
                                     </small>
                                 </div>
-                                <button type="submit">Add Device</button>
+                                <button type="submit">Gerät hinzufügen</button>
                             </form>
                         </div>
                     </div>

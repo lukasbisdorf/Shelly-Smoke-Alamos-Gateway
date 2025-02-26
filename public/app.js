@@ -102,27 +102,27 @@ function toggleWebhooks(deviceId) {
     if (webhookInfo.style.display === 'none') {
         const webhooks = getWebhookUrls(deviceId);
         webhookInfo.innerHTML = `
-            <h4>Webhook Configuration</h4>
-            <p>Configure these webhooks in your Shelly device's web interface under "Actions" → "Webhooks":</p>
+            <h4>Webhook-Konfiguration</h4>
+            <p>Konfigurieren Sie diese Webhooks in der Weboberfläche Ihres Shelly-Geräts unter "Aktionen" → "Webhooks":</p>
             
             <div class="webhook-url">
                 <strong>Alarm Webhook:</strong>
                 <ul>
-                    <li>Trigger: When smoke is detected</li>
+                    <li>Auslöser: Wenn Rauch erkannt wird</li>
                     <li>URL: ${webhooks.alarm}</li>
-                    <li>Method: POST</li>
+                    <li>Methode: POST</li>
                 </ul>
-                <button class="copy-button" onclick="copyToClipboard('${webhooks.alarm}')">Copy URL</button>
+                <button class="copy-button" onclick="copyToClipboard('${webhooks.alarm}')">URL kopieren</button>
             </div>
             
             <div class="webhook-url">
-                <strong>Battery Webhook:</strong>
+                <strong>Batterie Webhook:</strong>
                 <ul>
-                    <li>Trigger: When battery level changes</li>
+                    <li>Auslöser: Wenn sich der Batteriestand ändert</li>
                     <li>URL: ${webhooks.battery}</li>
-                    <li>Method: POST</li>
+                    <li>Methode: POST</li>
                 </ul>
-                <button class="copy-button" onclick="copyToClipboard('${webhooks.battery}')">Copy URL</button>
+                <button class="copy-button" onclick="copyToClipboard('${webhooks.battery}')">URL kopieren</button>
             </div>
         `;
         webhookInfo.style.display = 'block';
@@ -161,30 +161,30 @@ async function loadDevices() {
                
                 <h3>${device.name}</h3>
                 <p>ID: ${device.id}</p>
-                <p>Smoke Unit: ${device.unit}</p>
-                <p>Battery Unit: ${device.batteryUnit}</p>
-                <p>Location: ${device.location.street} ${device.location.house}, ${device.location.city}</p>
-                <p>Coordinates: ${device.location.coordinates.join(', ')}</p>
+                <p>Raucheinheit: ${device.unit}</p>
+                <p>Batterieeinheit: ${device.batteryUnit}</p>
+                <p>Standort: ${device.location.street} ${device.location.house}, ${device.location.city}</p>
+                <p>Koordinaten: ${device.location.coordinates.join(', ')}</p>
                 
                 <div id="webhook-${device.id}" class="webhook-info" style="display: none;">
-                    <h4>Webhook URLs</h4>
+                    <h4>Webhook-URLs</h4>
                     <div class="webhook-url">
                         <strong>Alarm Webhook:</strong> 
                         ${webhooks.alarm}
-                        <button class="copy-button" onclick="copyToClipboard('${webhooks.alarm}')">Copy</button>
+                        <button class="copy-button" onclick="copyToClipboard('${webhooks.alarm}')">Kopieren</button>
                     </div>
                     <div class="webhook-url">
-                        <strong>Battery Webhook:</strong> 
+                        <strong>Batterie Webhook:</strong> 
                         ${webhooks.battery}
-                        <button class="copy-button" onclick="copyToClipboard('${webhooks.battery}')">Copy</button>
+                        <button class="copy-button" onclick="copyToClipboard('${webhooks.battery}')">Kopieren</button>
                     </div>
                 </div>
                  <div class="device-actions">
                     <button class="show-webhooks" onclick="toggleWebhooks('${device.id}')">Webhooks</button>
-                    <button class="edit" onclick="editDevice('${device.id}')">Edit</button>
-                    <button class="remove" onclick="removeDevice('${device.id}')">Remove</button>
-                    <button class="test" onclick="triggerSmokeTest('${device.id}')">Test Smoke Alarm</button>
-                    <button class="test" onclick="triggerBatteryTest('${device.id}')">Test Battery Alarm</button>
+                    <button class="edit" onclick="editDevice('${device.id}')">Bearbeiten</button>
+                    <button class="remove" onclick="removeDevice('${device.id}')">Entfernen</button>
+                    <button class="test" onclick="triggerSmokeTest('${device.id}')">Rauchalarm testen</button>
+                    <button class="test" onclick="triggerBatteryTest('${device.id}')">Batteriealarm testen</button>
                 </div>
             </div>
         `;
@@ -347,8 +347,12 @@ async function handleLogin(event) {
     if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
         showApp();
+        
     } else {
+        document.getElementById('password').value = '';
         alert('Invalid credentials');
     }
 }
