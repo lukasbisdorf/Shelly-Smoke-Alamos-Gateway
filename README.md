@@ -136,3 +136,23 @@ Payload:
 - FE2 authentication token required
 - Input validation on all API endpoints
 - Rate limiting on webhook endpoints
+
+## Configuration
+
+The `AuthService` uses environment variables to configure the admin credentials and JWT secret. You can set these variables in your environment or in a `.env` file at the root of your project.
+
+### Environment Variables
+
+- `ADMIN_USERNAME`: The username for the admin user (default: `admin`)
+- `ADMIN_PASSWORD`: The password for the admin user (default: `password`)
+- `JWT_SECRET`: The secret key used to sign the JWT tokens (default: `your_jwt_secret`)
+
+### Example `.env` file
+
+```
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_admin_password
+JWT_SECRET=your_jwt_secret
+```
+
+Make sure to restart your application after changing these variables.

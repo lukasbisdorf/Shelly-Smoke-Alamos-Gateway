@@ -16,8 +16,8 @@ export class AlarmTransformer {
       authorization,
       data: {
         externalId: uuidv4(),
-        keyword: 'F-BMA',
-        keyword_description: 'Brandmeldung Fahrzeug',
+        keyword: 'BMA',
+        keyword_description: 'Interner Brandmeldealarm',
         message: [
           `Rauchmelder ${device.name} hat ausgelöst`,
           `Temperatur: ${event.temperature}°C`
@@ -48,8 +48,8 @@ export class AlarmTransformer {
       authorization,
       data: {
         externalId: uuidv4(),
-        keyword: 'TH',
-        keyword_description: 'Technische Hilfeleistung',
+        keyword: 'Battery',
+        keyword_description: 'Batteriewarnung',
         message: [
           `Batteriewarnung ${device.name}`,
           `Batterie-Level: ${event.batteryLevel}%`
