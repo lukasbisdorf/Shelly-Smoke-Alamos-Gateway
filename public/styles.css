@@ -3,14 +3,14 @@
 
 :root {
     --primary-color: #2c3e50;
-    --secondary-color: #3498db;
+    --secondary-color: #0e84d2;
     --danger-color: #e74c3c;
     --background-color: #f5f6fa;
     --border-color: #dcdde1;
     --info-bg-color: #e8f4f8;
     --info-border-color: #b8e3ed;
     /* New theme colors */
-    --header-bg: #34495e;
+    --header-bg: #233140;
     --header-text: #ecf0f1;
     --sidebar-bg: #ecf0f1;
     --sidebar-active: #bdc3c7;

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    image: shellysmoke2fe2:latest
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - config:/config
+    environment:
+      - CONFIG_PATH=/config/config.json
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin
+      - JWT_SECRET=ReplaceThisWithYourSecret
+
+volumes:
+  config:

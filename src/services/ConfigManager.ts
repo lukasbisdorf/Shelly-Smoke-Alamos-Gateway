@@ -6,7 +6,8 @@ export class ConfigManager {
   private db: JsonDB;
 
   constructor() {
-    this.db = new JsonDB(new Config("config", true, false, '/'));
+    const configPath = process.env.CONFIG_PATH || 'config.json';
+    this.db = new JsonDB(new Config(configPath, true, false, '/'));
   }
 
   async getDevices(): Promise<ShellyDevice[]> {
