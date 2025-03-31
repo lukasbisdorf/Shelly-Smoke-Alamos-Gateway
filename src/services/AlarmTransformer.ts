@@ -19,8 +19,8 @@ export class AlarmTransformer {
         keyword: 'BMA',
         keyword_description: 'Interner Brandmeldealarm',
         message: [
+          `Interner Brandmeldealarm`,
           `Rauchmelder ${device.name} hat ausgelöst`,
-          `Temperatur: ${event.temperature}°C`
         ],
         location: {
           coordinate: device.location.coordinates,
@@ -30,38 +30,6 @@ export class AlarmTransformer {
         },
         units: [{
           address: device.unit
-        }]
-      }
-    };
-  }
-
-  transformBatteryAlarm(
-    event: ShellyBatteryEvent,
-    device: ShellyDevice,
-    sender: string,
-    authorization: string
-  ): AlamosFE2Alarm {
-    return {
-      type: 'ALARM',
-      timestamp: new Date(event.ts * 1000).toISOString(),
-      sender,
-      authorization,
-      data: {
-        externalId: uuidv4(),
-        keyword: 'Battery',
-        keyword_description: 'Batteriewarnung',
-        message: [
-          `Batteriewarnung ${device.name}`,
-          `Batterie-Level: ${event.batteryLevel}%`
-        ],
-        location: {
-          coordinate: device.location.coordinates,
-          street: device.location.street,
-          house: device.location.house,
-          city: device.location.city
-        },
-        units: [{
-          address: device.batteryUnit
         }]
       }
     };

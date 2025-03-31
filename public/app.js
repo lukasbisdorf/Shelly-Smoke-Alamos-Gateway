@@ -60,14 +60,6 @@ const api = {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         if (!response.ok) throw new Error('Failed to trigger smoke test');
-    },
-
-    async triggerBatteryTest(deviceId) {
-        const response = await fetch(`/api/devices/${deviceId}/test/battery`, {
-            method: 'POST',
-            headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-        });
-        if (!response.ok) throw new Error('Failed to trigger battery test');
     }
 };
 
@@ -76,8 +68,7 @@ let editingDeviceId = null;
 function getWebhookUrls(deviceId) {
     const baseUrl = window.location.origin;
     return {
-        alarm: `${baseUrl}/api/alarm`,
-        battery: `${baseUrl}/api/battery`
+        alarm: `${baseUrl}/api/alarm`
     };
 }
 
@@ -113,16 +104,6 @@ function toggleWebhooks(deviceId) {
                     <li>Methode: POST</li>
                 </ul>
                 <button class="copy-button" onclick="copyToClipboard('${webhooks.alarm}')">URL kopieren</button>
-            </div>
-            
-            <div class="webhook-url">
-                <strong>Batterie Webhook:</strong>
-                <ul>
-                    <li>Auslöser: Wenn sich der Batteriestand ändert</li>
-                    <li>URL: ${webhooks.battery}</li>
-                    <li>Methode: POST</li>
-                </ul>
-                <button class="copy-button" onclick="copyToClipboard('${webhooks.battery}')">URL kopieren</button>
             </div>
         `;
         webhookInfo.style.display = 'block';
@@ -162,7 +143,6 @@ async function loadDevices() {
                 <h3>${device.name}</h3>
                 <p>ID: ${device.id}</p>
                 <p>Raucheinheit: ${device.unit}</p>
-                <p>Batterieeinheit: ${device.batteryUnit}</p>
                 <p>Standort: ${device.location.street} ${device.location.house}, ${device.location.city}</p>
                 <p>Koordinaten: ${device.location.coordinates.join(', ')}</p>
                 
@@ -173,18 +153,12 @@ async function loadDevices() {
                         ${webhooks.alarm}
                         <button class="copy-button" onclick="copyToClipboard('${webhooks.alarm}')">Kopieren</button>
                     </div>
-                    <div class="webhook-url">
-                        <strong>Batterie Webhook:</strong> 
-                        ${webhooks.battery}
-                        <button class="copy-button" onclick="copyToClipboard('${webhooks.battery}')">Kopieren</button>
-                    </div>
                 </div>
                  <div class="device-actions">
                     <button class="show-webhooks" onclick="toggleWebhooks('${device.id}')">Webhooks</button>
                     <button class="edit" onclick="editDevice('${device.id}')">Bearbeiten</button>
                     <button class="remove" onclick="removeDevice('${device.id}')">Entfernen</button>
                     <button class="test" onclick="triggerSmokeTest('${device.id}')">Rauchalarm testen</button>
-                    <button class="test" onclick="triggerBatteryTest('${device.id}')">Batteriealarm testen</button>
                 </div>
             </div>
         `;
@@ -197,7 +171,6 @@ async function addDevice(event) {
         id: document.getElementById('device-id').value,
         name: document.getElementById('device-name').value,
         unit: document.getElementById('device-unit').value,
-        batteryUnit: document.getElementById('device-battery-unit').value,
         location: {
             street: document.getElementById('device-street').value,
             house: document.getElementById('device-house').value,
@@ -233,7 +206,6 @@ async function editDevice(id) {
     document.getElementById('device-id').readOnly = true;
     document.getElementById('device-name').value = device.name;
     document.getElementById('device-unit').value = device.unit;
-    document.getElementById('device-battery-unit').value = device.batteryUnit;
     document.getElementById('device-street').value = device.location.street;
     document.getElementById('device-house').value = device.location.house;
     document.getElementById('device-city').value = device.location.city;
@@ -251,7 +223,6 @@ async function handleDeviceForm(event) {
         id: document.getElementById('device-id').value,
         name: document.getElementById('device-name').value,
         unit: document.getElementById('device-unit').value,
-        batteryUnit: document.getElementById('device-battery-unit').value,
         location: {
             street: document.getElementById('device-street').value,
             house: document.getElementById('device-house').value,
@@ -283,16 +254,6 @@ async function triggerSmokeTest(deviceId) {
         alert('Smoke test alarm triggered successfully');
     } catch (error) {
         alert('Failed to trigger smoke test alarm');
-        console.error(error);
-    }
-}
-
-async function triggerBatteryTest(deviceId) {
-    try {
-        await api.triggerBatteryTest(deviceId);
-        alert('Battery test alarm triggered successfully');
-    } catch (error) {
-        alert('Failed to trigger battery test alarm');
         console.error(error);
     }
 }

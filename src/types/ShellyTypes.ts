@@ -25,5 +25,4 @@ export interface ShellyDevice {
     coordinates: [number, number];
   };
   unit: string; // FE2 unit address for smoke alarm
-  batteryUnit: string; // FE2 unit address for battery alarm
 }

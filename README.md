@@ -226,6 +226,5 @@ JWT_SECRET=your_jwt_secret
 
 Make sure to restart your application after changing these variables.
 
-
 # Disclaimer:
-Diese Software wurde mit der Hilfe von Github CoPilot erzeugt. Der Anwendungsfall war für mich ein kleines Beispiel um die Leistungsfähigkeit KI Gestützer Programmierung zu testen... 
+Diese Software wurde mit der Hilfe von Github CoPilot erzeugt. Der Anwendungsfall war für mich ein kleines Beispiel um die Leistungsfähigkeit KI Gestützer Programmierung zu testen...
