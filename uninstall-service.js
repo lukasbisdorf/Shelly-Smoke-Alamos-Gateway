@@ -4,7 +4,7 @@ const path = require('path');
 // Create a new service object
 const svc = new Service({
   name: 'ShellySmoke2FE2',
-  script: path.join(__dirname, 'shelly2alamos.exe'), // Using the packaged executable
+  script: path.join(__dirname, 'service-wrapper.js'), // Use the wrapper script instead of exe directly
 });
 
 // Listen for uninstall events

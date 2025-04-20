@@ -5,7 +5,7 @@ const path = require('path');
 const svc = new Service({
   name: 'ShellySmoke2FE2',
   description: 'Shelly Smoke to Feuerwehr Einheit 2 Interface Service',
-  script: path.join(__dirname, 'shelly2alamos.exe'), // Using the packaged executable
+  script: path.join(__dirname, 'service-wrapper.js'), // Use the wrapper script instead of exe directly
   env: [{
     name: "NODE_ENV",
     value: "production"

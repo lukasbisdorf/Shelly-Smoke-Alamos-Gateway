@@ -15,11 +15,10 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "package": "pkg . --output windows-build/shelly2alamos.exe",
-    "prepare-client": "yarn run build && yarn run package && yarn run bundle-mac",
-    "bundle-mac": "mkdir -p windows-build/public && cp -R public/* windows-build/public/ && cp install.js uninstall.js service.js windows-build/",
+    "prepare-client": "yarn run build && yarn run package && yarn run bundle-client",
     "install-service": "node install-service.js",
     "uninstall-service": "node uninstall-service.js",
-    "bundle-client": "mkdir -p windows-build/public && cp -R public/* windows-build/public/ && cp install-service.js uninstall-service.js install-service.bat uninstall-service.bat windows-build/ && cp -R node_modules/node-windows windows-build/node_modules/"
+    "bundle-client": "mkdir -p windows-build/public && cp -R public/* windows-build/public/ && cp install-service.js uninstall-service.js service-wrapper.js install-service.bat uninstall-service.bat windows-build/ && cp package.json windows-build/ && cp README.md windows-build/"
   },
   "pkg": {
     "assets": [

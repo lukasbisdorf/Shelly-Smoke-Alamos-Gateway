@@ -226,5 +226,40 @@ JWT_SECRET=your_jwt_secret
 
 Make sure to restart your application after changing these variables.
 
+## Windows Service Installation
+
+### Prerequisites
+
+1. Install Node.js
+   - Download and install Node.js from [https://nodejs.org/](https://nodejs.org/) (LTS version recommended)
+   - During installation, make sure to select the option to add Node.js to your PATH
+
+### Installing as a Windows Service
+
+1. Extract all files to a permanent location (e.g., C:\ShellySmoke2FE2)
+2. Right-click on `install-service.bat` and select "Run as administrator"
+3. Wait for the installation to complete
+4. The service will start automatically
+
+### Managing the Service
+
+- The service will start automatically when Windows boots
+- You can manage the service through Windows Services Manager:
+  - Press Win+R, type `services.msc` and press Enter
+  - Find "ShellySmoke2FE2" in the list
+
+### Uninstalling the Service
+
+1. Right-click on `uninstall-service.bat` and select "Run as administrator" 
+2. Wait for the uninstallation to complete
+
+### Troubleshooting
+
+If you encounter any issues during installation:
+1. Make sure Node.js is installed correctly
+2. Ensure you're running the batch files as administrator
+3. Check if your system has internet access to download dependencies
+4. Verify that no antivirus software is blocking the scripts
+
 # Disclaimer:
 Diese Software wurde mit der Hilfe von Github CoPilot erzeugt. Der Anwendungsfall war für mich ein kleines Beispiel um die Leistungsfähigkeit KI Gestützer Programmierung zu testen...
