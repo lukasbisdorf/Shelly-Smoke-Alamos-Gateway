@@ -1,0 +1,34 @@
+# Node modules and logs
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Development tools
+.git
+.github
+.vscode
+coverage
+*.test.ts
+jest.config.js
+
+# Build artifacts
+dist
+windows-build
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose.yml
+
+# Documentation
+README.md
+LICENSE
+screenshots
+
+# Windows service related
+install-service.bat
+uninstall-service.bat
+install-service.js
+uninstall-service.js
+service-wrapper.js
